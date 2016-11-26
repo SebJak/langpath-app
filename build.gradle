@@ -1,0 +1,40 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+repositories {
+      mavenCentral()
+}
+
+dependencies {
+    compile 'com.yammer.dropwizard:dropwizard-core:0.6.2'//TODO REMOVE me
+    compile group: 'com.sparkjava', name: 'spark-core', version: '2.5.1'
+
+    compile group: 'org.mongodb.morphia', name: 'morphia', version: '1.2.1'
+
+    compile group: 'com.google.inject', name: 'guice', version: '4.1.0'
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+
+    compile group: 'org.spockframework', name: 'spock-guice', version: '1.0-groovy-2.4'
+
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
+
+    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+    testCompile 'cglib:cglib-nodep:3.1'
+    testCompile 'org.objenesis:objenesis:2.1'
+    testCompile 'org.codehaus.groovy:groovy-all:2.3.4'
+}
+
+jar {
+    manifest {
+        attributes('Implementation-Title': 'Langpaht',
+                   'Implementation-Version': 0.1,
+                   'Main-Class': 'com.langpath.app.LangpathBootsrap')
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+}
+

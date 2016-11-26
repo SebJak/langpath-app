@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html ng-app="langpath">
+<meta charset="UTF-8">
+<head>
+    <title>Langpath App</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!--<link rel="stylesheet" href="css/main.css">-->
+</head>
+<body>
+<div class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/welcome">Langpath</a>
+
+            </div>
+        <div ng-if="true" class="navbar-right">
+            <a class="navbar-brand" href="#/addWordGroup">Create word group</a>
+            <a class="navbar-brand" href="#/wordGroupList">Learn words</a>
+        </div>
+    </div>
+</div>
+
+<div class="container" ng-view="">
+
+
+</div>
+
+
+<!--<script src="js/angular.min.js"></script>-->
+<script src="js/angular.min.js"></script>
+<script src="js/angular-cookies.min.js"></script>
+<script src="js/angular-resource.min.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script src="js/jquery-2.1.0.min.js"></script>
+<script src="js/ui-bootstrap-tpls-0.10.0.min.js"></script>
+<script src="js/Chart.bundle.min.js"></script>
+
+<!--App-->
+<!--<script data-main="scripts/app" src="js/require.js"></script>-->
+<script src="scripts/app.js"></script>
+
+<!--Services-->
+<script src="scripts/services/sessionService.js"></script>
+
+<!--Controllers-->
+<script src="scripts/controllers/welcomeCtrl.js"></script>
+<script src="scripts/controllers/learnWordGroupCtrl.js"></script>
+<script src="scripts/controllers/wordGroupCtrl.js"></script>
+<script src="scripts/controllers/loginCtrl.js"></script>
+<script src="scripts/controllers/addWordGroupCtrl.js"></script>
+<script src="scripts/controllers/wordGroupListCtrl.js"></script>
+<script src="scripts/controllers/editWordGroupCtrl.js"></script>
+<script src="scripts/controllers/registerUser.js"></script>
+
+
+
+</body>
+</html>
+

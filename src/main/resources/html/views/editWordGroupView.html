@@ -1,0 +1,43 @@
+<div>
+    <h2>Edit word group.</h2> <br />
+    <!--<p>Count of words: 6, Last trained: 12.10.2016, Count of repetition: 5</p>-->
+    <alert ng-if="message.type == 'INFO'" ng-repeat="message in messages" close="closeAlert($index)" >
+        <div class="alert alert-success" role="alert">
+            <p>{{message.value}}</p>
+        </div>
+    </alert>
+
+    <alert ng-if="message.type == 'ERROR'" ng-repeat="message in messages" close="closeAlert($index)" >
+        <div class="alert alert-danger" role="alert">
+            <p>{{message.value}} <p class="alert-link">{{currentWord.meaning}}</p></p>
+        </div>
+    </alert>
+
+    <div class="form-inline">
+        <label>Source language: </label> <select ng-options="lang as lang.label for lang in langs track by lang.id" ng-model="wordGroup.sourceLang"></select>
+        <label>Target language: </label> <select ng-options="lang as lang.label for lang in langs track by lang.id" ng-model="wordGroup.targetLang"></select>
+    </div>
+    <br />
+    <div class="form-inline">
+        <label>Name: </label><input ng-model="wordGroup.name" >
+        <label>Description: </label><input ng-model="wordGroup.description" >
+    </div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Value</th>
+            <th>Meaning</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tbody>
+        <tr ng-repeat="word in wordGroup.words">
+            <td><input ng-model="word.value" ></td>
+            <td><input ng-model="word.meaning" ></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button ng-click="saveGroup()">Save group</button>
+    <button ng-click="cancel()">Cancel</button>
+</div>

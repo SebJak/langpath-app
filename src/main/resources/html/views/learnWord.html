@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Langppath</title>
+</head>
+<body>
+
+<h2>You learn word group: {{wordGroup.name}}</h2> <div class="btn" ></div><p>Count: 16</p> <p>Left: 10</p> <p>Wrong answered: 4</p>
+
+<alert ng-if="message.type == 'INFO'" ng-repeat="message in messages" close="closeAlert($index)" >
+    <div class="alert alert-success" role="alert">
+        <p>{{message.value}}</p>
+    </div>
+</alert>
+
+<alert ng-if="message.type == 'ERROR'" ng-repeat="message in messages" close="closeAlert($index)" >
+    <div class="alert alert-danger" role="alert">
+        <p>{{message.value}} <p class="alert-link">{{lastWrongAnswer.value}} : {{lastWrongAnswer.meaning}}</p></p>
+    </div>
+</alert>
+
+<div id="learnWord">
+    <div>
+        <label>Value: </label> <input id="value" ng-model="currentWord.value" disabled/>
+        <label> </label> <input id="answer" ng-model="answer" />
+        <button id="checkAnswerButton" ng-click="checkAnswer()">Check answer</button>
+    </div>
+</div>
+</body>
+
+</html>

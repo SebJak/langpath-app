@@ -1,0 +1,22 @@
+<div>
+    <div>
+        Word group view. <br />
+        Here you see the word group: {{wordGroup.name}} created by {{wordGroup.author}}.
+    </div>
+    <br />
+    <div>
+        <div class="btn-group">
+            <button class="btn btn-primary btn-block btn-info"><span class="glyphicon-play"> </span>Start learn</button>
+            <button class="btn btn-primary btn-block btn-info"><span class="glyphicon-print"> </span>Print as fish cards</button>
+            <button class="btn btn-primary btn-block btn-info"><span class="glyphicon-edit"> </span>Edit</button>
+        </div>
+        <table class="table table-hover">
+            <tbody>
+            <tr ng-repeat="word in wordGroup.words">
+                <td>{{word.value}}</td>
+                <td>{{word.meaning}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

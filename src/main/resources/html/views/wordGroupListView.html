@@ -1,0 +1,28 @@
+<div>
+<h2>Word group list view.</h2>
+    <table class="table table-hover">
+    <thead>
+    <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Languages</th>
+        <th>Count of words</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+        <tbody>
+        <tr ng-repeat="group in groups">
+            <td>{{$index + 1}}</td>
+            <td>{{group.name}}</td>
+            <td>{{group.description}}</td>
+            <td>{{group.sourceLang}} : {{group.targetLang}}</td>
+            <td>{{group.countWords}}</td>
+            <td><a ng-href="#/learnWordGroup/{{group.id}}">Learn</a> <br />
+                <a ng-href="#/editWordGroup/{{group.id}}">Edit</a>
+                <button class="btn-link" ng-click="remove(group.id)">Remove</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
