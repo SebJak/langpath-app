@@ -21,6 +21,7 @@ public class AppModule extends AbstractModule{
         install(new ValidatorsModule());
         install(new CommandsModule());
         install(new QueryServiceModule());
+        install(new RepositoryModule());
     }
 
     @Provides

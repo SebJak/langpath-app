@@ -3,10 +3,8 @@ package com.langpath.app.validator;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.langpath.app.model.storage.User;
-import org.apache.commons.lang3.StringUtils;
+import com.langpath.app.repository.api.UserRepository;
 import org.apache.log4j.Logger;
-import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.query.Query;
 
 import static org.apache.commons.lang3.StringUtils.isNoneBlank;
 
@@ -16,29 +14,23 @@ import static org.apache.commons.lang3.StringUtils.isNoneBlank;
 
 public class RegisterUserValidator implements Validation<User> {
 
+    @Inject
+    private Logger logger;
 
     @Inject
-    Logger logger;
-
-    @Inject
-    @Named("datastore")
-    Datastore datastore;
+    @Named("userRepository")
+    private UserRepository userRepository;
 
     @Override
-    public boolean validate(User input) {
+    public boolean validate(final User input) {
         logger.info("Validating the register user.");
         try {
             if (isNoneBlank(input.getEmail())) {
-                Query<User> userQuery = datastore.find(User.class, "email", input.getEmail());
-                if (userQuery.get() == null) {
-                    if (isNoneBlank(input.getPassword())) {
-                        return true;
-                    }
-                }
+                return userRepository.findByEmail(input.getEmail()) == null;
             }
         }
         catch (Exception ex) {
-            logger.error("During validation New user throw exception.");
+            logger.error("During validation New user throw exception.", ex);
         }
         return false;
     }

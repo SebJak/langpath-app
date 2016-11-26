@@ -5,6 +5,7 @@ import com.google.inject.name.Named;
 import com.langpath.app.commands.CommandService;
 import com.langpath.app.model.enums.Status;
 import com.langpath.app.model.storage.User;
+import com.langpath.app.repository.api.UserRepository;
 import com.langpath.app.validator.Validation;
 import org.apache.log4j.Logger;
 import org.mongodb.morphia.Datastore;
@@ -25,14 +26,14 @@ public class RegisterUserCommand implements CommandService<User> {
     Validation<User> validator;
 
     @Inject
-    @Named("datastore")
-    private Datastore datastore;
+    @Named("userRepository")
+    UserRepository userRepository;
 
     @Override
     public int command(User input) {
         logger.info("Register new user.");
         if (validator.validate(input)) {
-                datastore.save(input);
+                userRepository.saveOne(input);
             return OK.getCode();
         }
         return ERROR.getCode();

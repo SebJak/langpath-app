@@ -5,5 +5,5 @@ package com.langpath.app.validator;
  */
 public interface Validation <T> {
 
-    boolean validate(T input);
+    boolean validate(final T input);
 }
