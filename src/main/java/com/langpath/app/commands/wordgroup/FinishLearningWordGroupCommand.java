@@ -6,14 +6,17 @@ import com.langpath.app.commands.CommandService;
 import com.langpath.app.model.storage.WordGroup;
 import com.langpath.app.model.command.LearningReport;
 import com.langpath.app.validator.Validation;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 
 import java.util.Date;
 
 import static com.langpath.app.model.enums.Status.ERROR;
 import static com.langpath.app.model.enums.Status.OK;
 
-public class FinishLearnignWordGroupCommand implements CommandService<LearningReport> {
+public class FinishLearningWordGroupCommand implements CommandService<LearningReport> {
 
     @Inject
     @Named("finishLearningValidator")
@@ -26,10 +29,9 @@ public class FinishLearnignWordGroupCommand implements CommandService<LearningRe
     @Override
     public int command(LearningReport input) {
         if(validator.validate(input)) {
-            WordGroup wordGroup = datastore.createQuery(WordGroup.class).filter("id ==", input.getWordGroupId()).get();
-            wordGroup.increaseCountOfRepetition(1);
-            wordGroup.setLastActive(new Date());
-            wordGroup.increaseTimeOfLearning(input.getTimeOfLearning());
+            Query<WordGroup> wordGroup = datastore.createQuery(WordGroup.class).filter("_id", new ObjectId(input.getWordGroupId()));
+            UpdateOperations<WordGroup> updateOperations = datastore.createUpdateOperations(WordGroup.class).inc("timeOfLearning", input.getTimeOfLearning()).set("lastActive", new Date()).inc("countOfRepetition");
+            datastore.update(wordGroup, updateOperations);
             return OK.getCode();
         }
         return ERROR.getCode();

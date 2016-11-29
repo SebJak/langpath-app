@@ -19,6 +19,6 @@ public class ValidatorsModule extends AbstractModule {
         bind(new TypeLiteral<Validation<LoginCredential>>(){}).annotatedWith(Names.named("loginCredentialValidator")).to(LoginUserValidator.class);
         bind(new TypeLiteral<Validation<User>>(){}).annotatedWith(Names.named("registerUserValidator")).to(RegisterUserValidator.class);
         bind(new TypeLiteral<Validation<WordGroup>>(){}).annotatedWith(Names.named("wordGroupValidator")).to(WordGroupValidator.class);
-        bind(new TypeLiteral<Validation<LearningReport>>(){}).annotatedWith(Names.named("finishLearningValidator")).to(FinieshLearningValidator.class);
+        bind(new TypeLiteral<Validation<LearningReport>>(){}).annotatedWith(Names.named("finishLearningValidator")).to(FinishLearningValidator.class);
     }
 }

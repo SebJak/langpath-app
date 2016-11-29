@@ -3,11 +3,14 @@ package com.langpath.app.commands.user
 import com.google.inject.Inject
 import com.google.inject.name.Named
 import com.langpath.app.commands.CommandService
+import com.langpath.app.model.enums.Status
 import com.langpath.app.model.storage.User
 import com.langpath.app.modules.AppModule
 import org.mongodb.morphia.Datastore
 import spock.guice.UseModules
 import spock.lang.Specification
+
+import static com.langpath.app.model.enums.Status.ERROR
 
 @UseModules([AppModule])
 class RegisterUserCommandTest extends Specification {
@@ -63,5 +66,12 @@ class RegisterUserCommandTest extends Specification {
         registerUser.command(user2)
         then:
         datastore.createQuery(User.class).filter("_id", user2.getId()).countAll() == 0
+    }
+
+    def "Should not allow for register null user"() {
+        when:
+        User user = null
+        then:
+        ERROR.code == registerUser.command(user)
     }
 }
