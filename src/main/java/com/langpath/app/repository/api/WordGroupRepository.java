@@ -1,9 +1,11 @@
 package com.langpath.app.repository.api;
 
 import com.langpath.app.model.storage.WordGroup;
-import org.bson.types.ObjectId;
 
-public interface WordGroupRepository {
+import java.util.Date;
 
-    WordGroup findOne(ObjectId id);
+public interface WordGroupRepository extends Repository<WordGroup>{
+
+    void finishLearningUpdate(final String idHex, final Long learningTime, final Date finishTime);
+
 }

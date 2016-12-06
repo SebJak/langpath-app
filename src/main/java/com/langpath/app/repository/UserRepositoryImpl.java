@@ -3,6 +3,7 @@ package com.langpath.app.repository;
 import com.langpath.app.model.storage.User;
 import com.langpath.app.repository.api.UserRepository;
 import com.sun.istack.internal.NotNull;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.Query;
 
 public class UserRepositoryImpl extends AbstractDAO<User> implements UserRepository {
@@ -14,4 +15,8 @@ public class UserRepositoryImpl extends AbstractDAO<User> implements UserReposit
 
     }
 
+    @Override
+    public User findOne(ObjectId id) {
+        return findOne(User.class, id);
+    }
 }

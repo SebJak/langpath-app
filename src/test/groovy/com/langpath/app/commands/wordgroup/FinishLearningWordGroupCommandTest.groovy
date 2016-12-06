@@ -12,7 +12,7 @@ import spock.lang.Specification
 class FinishLearningWordGroupCommandTest extends Specification {
 
     @Inject
-    FinishLearningWordGroupCommand finishLearnignWordGroupCommand;
+    FinishLearningWordGroupCommand finishLearningWordGroupCommand;
 
     @Inject
     WordGroupRepositoryImpl wordGroupRepository;
@@ -26,7 +26,7 @@ class FinishLearningWordGroupCommandTest extends Specification {
         lr.setWordGroupId(wordGroup.getId().toString())
         lr.setWrongAnswers(5)
         when:
-        finishLearnignWordGroupCommand.command(lr)
+        finishLearningWordGroupCommand.command(lr)
         then:
         20l == wordGroupRepository.findOne(wordGroup.getId()).getTimeOfLearning()
     }
