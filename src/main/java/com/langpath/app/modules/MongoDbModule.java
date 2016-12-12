@@ -14,8 +14,8 @@ public class MongoDbModule extends AbstractModule{
 
     private final Datastore datastore;
 
-    public MongoDbModule() {
-        MongoClient client = new MongoClient();
+    public MongoDbModule(final String host, final int port) {
+        MongoClient client = new MongoClient(host);
         Morphia morphia = new Morphia();
         morphia.mapPackage("com.langpath.app.model.storage");
         datastore = morphia.createDatastore(client, "test");

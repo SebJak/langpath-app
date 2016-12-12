@@ -4,6 +4,12 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import org.apache.log4j.Logger;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 /**
  * Created by root on 20.10.16.
  */
@@ -17,11 +23,21 @@ public class AppModule extends AbstractModule{
 
     @Override
     protected void configure() {
-        install(new MongoDbModule());
-        install(new ValidatorsModule());
-        install(new CommandsModule());
-        install(new QueryServiceModule());
-        install(new RepositoryModule());
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(classLoader.getResource("app.properties").getFile());
+
+            Properties properties = new Properties();
+            properties.load(new FileInputStream(file));
+            install(new MongoDbModule(properties.getProperty("mongo.host"), Integer.parseInt(properties.getProperty("mongo.port"))));
+            install(new ValidatorsModule());
+            install(new CommandsModule());
+            install(new QueryServiceModule());
+            install(new RepositoryModule());
+        }
+        catch (IOException e) {
+            logger.error("Error during initialization, ", e);
+        }
     }
 
     @Provides
